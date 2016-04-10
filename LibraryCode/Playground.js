@@ -188,10 +188,114 @@
       return [code1];
     };
 
+    Configure.PendingArticleNames2(code1, code2)(function() {
+      return [code1, code2];
+    });
+
+    Configure.PendingArticleNames3(code1, code2, code3)(function() {
+      return [code1, code2, code3];
+    });
+
+    Configure.PendingArticleNames4(code1, code2, code3, code4)(function() {
+      return [code1, code2, code3, code4];
+    });
+
+    Configure.PendingArticleNames5(code1, code2, code3, code4, code5)(function() {
+      return [code1, code2, code3, code4, code5];
+    });
+
+    Configure.PendingArticleNames9(code1, code2, code3, code4, code5, code6, code7, code8, code9)(function() {
+      return [code1, code2, code3, code4, code5, code6, code7, code8, code9];
+    });
+
     Configure.ConfigureContractTermArticles = function() {
       var articleArray, configCategory;
       configCategory = ProcessCategory.prototype.CATEGORY_TERMS;
       articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_CONTRACT_EMPL_TERM, configCategory, this.EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_POSITION_EMPL_TERM, configCategory, this.PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_CONTRACT_EMPL_TERM))];
+      return articleArray;
+    };
+
+    Configure.ConfigurePositionTimeArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_TIMES;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_SCHEDULE_WORK, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_POSITION_EMPL_TERM)), new Article(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_SCHEDULE, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SCHEDULE_WORK)), new Article(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_WORKING, configCategory, PendingArticleNames2(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_SCHEDULE, ConfigArticleCode.prototype.ARTICLE_POSITION_EMPL_TERM)), new Article(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_ABSENCE, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_WORKING)), new Article(ConfigArticleCode.prototype.ARTICLE_TIMEHOURS_WORKING, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_WORKING)), new Article(ConfigArticleCode.prototype.ARTICLE_TIMEHOURS_ABSENCE, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TIMESHEET_ABSENCE))];
+      return articleArray;
+    };
+
+    Configure.ConfigureGrossIncomeArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_AMOUNT;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_SALARY_BASE, configCategory, PendingArticleNames2(ConfigArticleCode.prototype.ARTICLE_TIMEHOURS_WORKING, ConfigArticleCode.prototype.ARTICLE_TIMEHOURS_ABSENCE))];
+      return articleArray;
+    };
+
+    Configure.ConfigureTotalIncomeArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_FINAL;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_INCOME_GROSS, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_INCOME_NETTO, configCategory, PendingArticleNames9(ConfigArticleCode.prototype.ARTICLE_INCOME_GROSS, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_TOTAL, ConfigArticleCode.prototype.ARTICLE_TAXING_BONUS_CHILD, ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_GENERAL, ConfigArticleCode.prototype.ARTICLE_HEALTH_EMPLOYEE_GENERAL, ConfigArticleCode.prototype.ARTICLE_HEALTH_EMPLOYEE_MANDATORY, ConfigArticleCode.prototype.ARTICLE_SOCIAL_EMPLOYEE_GENERAL, ConfigArticleCode.prototype.ARTICLE_SOCIAL_EMPLOYEE_PENSION, ConfigArticleCode.prototype.ARTICLE_GARANT_EMPLOYEE_PENSION))];
+      return articleArray;
+    };
+
+    Configure.ConfigureNettoDeductsArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_TOTAL, configCategory, PendingArticleNames2(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_GENERAL, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_SOLIDARY)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_BASIS_GENERAL)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_SOLIDARY, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_BASIS_SOLIDARY)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_BASIS_GENERAL)), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_EMPLOYEE_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_GENERAL)), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_EMPLOYEE_MANDATORY, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_MANDATORY)), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_EMPLOYEE_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_BASIS_GENERAL)), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_EMPLOYEE_PENSION, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_BASIS_PENSION)), new Article(ConfigArticleCode.prototype.ARTICLE_GARANT_EMPLOYEE_PENSION, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_GARANT_BASIS_PENSION))];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisHealthArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_SUBJECT, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_PARTICIP, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_SUBJECT)), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_PARTICIP)), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_MANDATORY, configCategory, PendingArticleNames2(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_GENERAL, ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_PARTICIP)), new Article(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_LEGALCAP, configCategory, PendingArticleNames2(ConfigArticleCode.prototype.ARTICLE_HEALTH_BASIS_GENERAL, ConfigArticleCode.prototype.ARTICLE_HEALTH_INCOME_PARTICIP))];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisSocialArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_SUBJECT, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_PARTICIP, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_SUBJECT)), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_BASIS_GENERAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_PARTICIP)), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_BASIS_PENSION, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_PARTICIP)), new Article(ConfigArticleCode.prototype.ARTICLE_SOCIAL_BASIS_LEGALCAP, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_SOCIAL_INCOME_PARTICIP))];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisGarantArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_GARANT_INCOME_SUBJECT, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_GARANT_INCOME_PARTICIP, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_GARANT_INCOME_SUBJECT)), new Article(ConfigArticleCode.prototype.ARTICLE_GARANT_BASIS_PENSION, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_GARANT_INCOME_PARTICIP)), new Article(ConfigArticleCode.prototype.ARTICLE_GARANT_BASIS_LEGALCAP, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_GARANT_INCOME_PARTICIP))];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisTaxingArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SUBJECT, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_HEALTH, configCategory, EMPTY_PENDING_NAMES), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SOCIAL, configCategory, EMPTY_PENDING_NAMES)];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisAdvancesArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SUBJECT)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_HEALTH, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_HEALTH)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_SOCIAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SOCIAL)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_BASIS_GENERAL, configCategory, PendingArticleNames3(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_HEALTH, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_SOCIAL)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_BASIS_SOLIDARY, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_BASIS_GENERAL))];
+      return articleArray;
+    };
+
+    Configure.ConfigureBasisWithholdArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_INCOME, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SUBJECT)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_HEALTH, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_HEALTH)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_SOCIAL, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_INCOME_SOCIAL)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_BASIS_GENERAL, configCategory, PendingArticleNames3(ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_INCOME, ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_HEALTH, ConfigArticleCode.prototype.ARTICLE_TAXING_WITHHOLD_SOCIAL))];
+      return articleArray;
+    };
+
+    Configure.ConfigureAllowanceTaxisArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_PAYER, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_DISABILITY, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_STUDYING, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_CHILD, configCategory, PendingArticleNames1(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_INCOME))];
+      return articleArray;
+    };
+
+    Configure.ConfigureRebateTaxisArticles = function() {
+      var articleArray, configCategory;
+      configCategory = ProcessCategory.prototype.CATEGORY_NETTO;
+      articleArray = [new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_REBATE_PAYER, configCategory, PendingArticleNames4(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_PAYER, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_TOTAL, ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_DISABILITY, ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_STUDYING)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_REBATE_CHILD, configCategory, PendingArticleNames3(ConfigArticleCode.prototype.ARTICLE_TAXING_ALLOWANCE_CHILD, ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_TOTAL, ConfigArticleCode.prototype.ARTICLE_TAXING_REBATE_PAYER)), new Article(ConfigArticleCode.prototype.ARTICLE_TAXING_BONUS_CHILD, configCategory, PendingArticleNames3(ConfigArticleCode.prototype.ARTICLE_TAXING_ADVANCES_TOTAL, ConfigArticleCode.prototype.ARTICLE_TAXING_REBATE_PAYER, ConfigArticleCode.prototype.ARTICLE_TAXING_REBATE_CHILD))];
       return articleArray;
     };
 
